@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RentEase - Admin Settings</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f6fb;
+            color: #172033;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 220px;
+            background: #062846;
+            color: white;
+            padding: 20px 12px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .brand {
+            text-align: center;
+            padding-bottom: 25px;
+        }
+
+        .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #e8e9ec;
+            color: #666;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .brand strong {
+            display: block;
+            margin-top: 8px;
+        }
+
+        .brand small {
+            color: #cbd7e3;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #0874c9;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 220px;
+            width: calc(100% - 220px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid #d8dce5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .notification-icon {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 25px 28px;
+            max-width: 1000px;
+        }
+
+        /* CARD */
+        .settings-card {
+            background: white;
+            border: 1px solid #d9dce3;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e1e4e9;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 17px;
+            color: #062846;
+        }
+
+        .card-header p {
+            margin: 5px 0 0;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* PROFILE */
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: #eaf4fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .profile-name strong {
+            display: block;
+            font-size: 16px;
+        }
+
+        .profile-name span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* FORM */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 10px 11px;
+            border: 1px solid #ccd2db;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #0874c9;
+        }
+
+        .button-row {
+            margin-top: 18px;
+        }
+
+        .btn {
+            border: 1px solid #c8ced8;
+            background: white;
+            padding: 9px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-primary {
+            background: #0874c9;
+            color: white;
+            border-color: #0874c9;
+        }
+
+        .btn-primary:hover {
+            background: #0665ad;
+        }
+
+        /* NOTIFICATIONS */
+        .notification-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-info strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .notification-info span {
+            display: block;
+            color: #777;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* TOGGLE */
+        .switch {
+            position: relative;
+            width: 46px;
+            height: 24px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #cbd0d8;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: .2s;
+        }
+
+        .switch input:checked + .slider {
+            background: #0874c9;
+        }
+
+        .switch input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        /* LOGOUT */
+        .logout-card {
+            border: 1px solid #dd9b9b;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #b42323;
+            border: 1px solid #b42323;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #fff4f4;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 175px;
+            }
+
+            .main {
+                margin-left: 175px;
+                width: calc(100% - 175px);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .nav {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .content {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="avatar">◯</div>
+
+            <strong>RMDC</strong>
+            <small>Admin</small>
+        </div>
+
+        <nav class="nav">
+
+            <a href="dashboard.html">
+               🏠 Dashboard
+            </a>
+
+            <a href="units.html">
+                🏢 Units
+            </a>
+
+            <a href="tenants.html">
+                👥 Tenants
+            </a>
+
+            <a href="payments.html">
+                💳 Payments
+            </a>
+
+            <a href="appointments.html">
+                📅 Appointments
+            </a>
+
+            <a href="maintenance.html">
+                🔧 Maintenance
+            </a>
+
+            <a href="settings.html" class="active">
+                ⚙️ Settings
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <header class="topbar">
+
+            <h1>Settings</h1>
+
+            <span
+                class="notification-icon"
+                onclick="showMessage('You have no new notifications.')">
+                🔔
+            </span>
+
+        </header>
+
+
+        <section class="content">
+
+
+            <!-- ADMIN PROFILE -->
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <h2>👤 Admin Profile</h2>
+
+                    <p>
+                        Manage your basic administrator information.
+                    </p>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="profile-top">
+
+                        <div class="profile-avatar">
+                            👤
+                        </div>
+
+                        <div class="profile-name">
+
+                            <strong id="profileDisplayName">
+                                Admin
+                            </strong>
+
+                            <span>
+                                Apartment Administrator
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>Admin Name</label>
+
+                            <input
+                                type="text"
+                                id="adminName"
+                                value="Admin">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Email</label>
+
+                            <input
+                                type="email"
+                                id="adminEmail"
+                                value="admin@rentease.com">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Contact Number</label>
+
+                            <input
+                                type="text"
+                                id="adminContact"
+                                placeholder="09XX XXX XXXX">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="button-row">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="saveProfile()">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- APARTMENT INFORMATION -->
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <h2>🏠 Apartment Information</h2>
+
+                    <p>
+                        Manage the basic information of the apartment.
+                    </p>
+
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+
+                            <label>Apartment Name</label>
+
+                            <input
+                                type="text"
+                                id="apartmentName"
+                                value="RMDC Apartment Rental">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Contact Number</label>
+
+                            <input
+                                type="text"
+                                id="apartmentContact"
+                                placeholder="09XX XXX XXXX">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>Address</label>
+
+                            <input
+                                type="text"
+                                id="apartmentAddress"
+                                placeholder="Enter apartment address">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>GCash Number</label>
+
+                            <input
+                                type="text"
+                                id="gcash"
+                                placeholder="09XX XXX XXXX">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="button-row">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="saveApartment()">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NOTIFICATIONS -->
+            <div class="settings-card">
+
+                <div class="card-header">
+
+                    <h2>🔔 Notifications</h2>
+
+                    <p>
+                        Choose which notifications the admin wants to receive.
+                    </p>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="notification-item">
+
+                        <div class="notification-info">
+
+                            <strong>
+                                Payment Reminders
+                            </strong>
+
+                            <span>
+                                Receive reminders for pending rental payments.
+                            </span>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="toggleNotification(
+                                    'Payment Reminders',
+                                    this
+                                )">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <div class="notification-item">
+
+                        <div class="notification-info">
+
+                            <strong>
+                                New Viewing Appointments
+                            </strong>
+
+                            <span>
+                                Get notified when a viewing is scheduled.
+                            </span>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="toggleNotification(
+                                    'Viewing Appointments',
+                                    this
+                                )">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+
+                    <div class="notification-item">
+
+                        <div class="notification-info">
+
+                            <strong>
+                                New Maintenance Requests
+                            </strong>
+
+                            <span>
+                                Get notified when a tenant submits a request.
+                            </span>
+
+                        </div>
+
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="toggleNotification(
+                                    'Maintenance Requests',
+                                    this
+                                )">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LOGOUT -->
+            <div class="settings-card">
+
+    <div class="card-header">
+        <h2>🚪 Logout</h2>
+        <p>Exit the RentEase Admin account.</p>
+    </div>
+
+    <div class="card-body">
+
+        <button class="logout-btn" onclick="openLogoutModal()">
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+
+        </section>
+
+    </main>
+
+</div>
+
+<div class="logout-modal" id="logoutModal">
+
+    <div class="logout-box">
+
+        <h2>Log Out</h2>
+
+        <p>Are you sure you want to log out?</p>
+
+        <div class="logout-actions">
+
+            <button class="cancel-button" onclick="closeLogoutModal()">
+                Cancel
+            </button>
+
+            <button class="confirm-button" onclick="confirmLogout()">
+                OK
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    function openLogoutModal() {
+    document.getElementById("logoutModal").style.display = "flex";
+}
+
+function closeLogoutModal() {
+    document.getElementById("logoutModal").style.display = "none";
+}
+
+function confirmLogout() {
+    window.location.href = "index.html";
+}
+
+
+function showMessage(message) {
+
+    alert(message);
+
+}
+
+
+function saveProfile() {
+
+    const name =
+        document.getElementById("adminName").value;
+
+    document.getElementById(
+        "profileDisplayName"
+    ).textContent = name || "Admin";
+
+    alert("Admin profile saved successfully!");
+
+}
+
+
+function saveApartment() {
+
+    alert("Apartment information saved successfully!");
+
+}
+
+
+function toggleNotification(name, checkbox) {
+
+    const status =
+        checkbox.checked
+        ? "enabled"
+        : "disabled";
+
+    alert(name + " " + status + ".");
+
+}
+
+
+function openLogoutModal() {
+    document.getElementById("logoutModal").style.display = "flex";
+}
+
+function closeLogoutModal() {
+    document.getElementById("logoutModal").style.display = "none";
+}
+
+function confirmLogout() {
+    window.location.href = "index.html";
+}
+
+
+</script>
+
+</body>
+</html>

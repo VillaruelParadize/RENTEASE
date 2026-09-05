@@ -4,40 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>RentEase - Maintenance</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/tenant.css">
 </head>
 
 <body>
 
-<div class="layout">
+<div class="tenant-layout">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
 
-        <div class="profile">
-            <div class="profile-icon">👤</div>
-            <h3>RMDC</h3>
-            <p>Admin</p>
+        <div class="brand">
+            <div class="brand-icon">🏠</div>
+            <span>RentEase</span>
         </div>
 
-        <nav>
-            <a href="dashboard.html" class="nav-link">
-            🏠 Dashboard</a>
-            <a href="units.html" class="nav-link">
-                🏢 Units</a>
-            <a href="tenants.html" class="nav-link">
-                👥 Tenants</a>
-            <a href="payments.html" class="nav-link">
-                💳 Payments</a>
-            <a href="appointments.html" class="nav-link">
-                📅 Appointments</a>
-            <a href="maintenance.html" class="nav-link active">
-                🔧 Maintenance</a>
-            <a href="settings.html" class="nav-link">
-                ⚙️ Settings</a>
+        <div class="tenant-info">
+            <div class="profile-circle"></div>
+            <h3>Hello, Guest</h3>
+            <p>Current Tenant</p>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-item">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="payments.html" class="nav-item">
+                <span>₱</span>
+                Payments
+            </a>
+
+            <a href="maintenance.html" class="nav-item active">
+                <span>🔧</span>
+                Maintenance
+            </a>
+
+            <a href="profile.html" class="nav-item">
+                <span>👤</span>
+                Profile
+            </a>
+
         </nav>
 
     </aside>
@@ -46,86 +57,183 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
 
+        <!-- TOPBAR -->
         <header class="topbar">
-            <h1>Maintenance</h1>
-            <span class="notification">🔔</span>
+
+            <div>
+                <h1>Maintenance</h1>
+                <p>Submit and track your maintenance requests.</p>
+            </div>
+
+            <button class="notification-btn" title="Notifications">
+                🔔
+            </button>
+
         </header>
 
 
-        <section class="dashboard-content">
+        <!-- CONTENT -->
+        <div class="maintenance-content">
 
-            <div class="page-header">
+            <!-- REQUEST FORM -->
+            <section class="maintenance-form-card">
 
-                <div>
-                    <h2>Maintenance Requests</h2>
-                    <p>View and manage maintenance requests from tenants.</p>
+                <h2>Request Maintenance</h2>
+
+                <p class="form-description">
+                    Having a problem with your apartment? Submit a maintenance request below.
+                </p>
+
+                <form onsubmit="submitRequest(event)">
+
+                    <div class="form-group">
+                        <label for="issue">Issue / Problem</label>
+
+                        <select id="issue" required>
+                            <option value="">Select an issue</option>
+                            <option>Plumbing Problem</option>
+                            <option>Electrical Problem</option>
+                            <option>Water Leakage</option>
+                            <option>Broken Door or Lock</option>
+                            <option>Air Conditioning Problem</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+
+                        <textarea
+                            id="description"
+                            rows="5"
+                            placeholder="Describe the problem..."
+                            required></textarea>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="date">Preferred Date</label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required>
+                    </div>
+
+
+                    <button type="submit" class="action-button">
+                        Submit Request
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- REQUEST HISTORY -->
+            <section class="maintenance-list-card">
+
+                <div class="maintenance-title">
+
+                    <div>
+                        <h2>My Maintenance Requests</h2>
+                        <p>Track the status of your submitted requests.</p>
+                    </div>
+
                 </div>
 
-                <button class="add-button">
-                    + Add Request
-                </button>
 
-            </div>
+                <!-- REQUEST 1 -->
+                <div class="request-item">
 
+                    <div class="request-icon">
+                        🔧
+                    </div>
 
-            <!-- MAINTENANCE CARDS -->
+                    <div class="request-details">
 
-            <div class="cards">
+                        <h3>Electricity Breakdown</h3>
 
-                <div class="card">
-                    <span>Leaking Faucet</span>
-                    <strong>Unit 2B</strong>
-                    <p>Tenant: Maria Santos</p>
-                    <p>Status: Pending</p>
+                        <p>
+                            Some lights and outlets are not working properly.
+                        </p>
+
+                        <span>
+                            Requested: August 21, 2026
+                        </span>
+
+                    </div>
+
+                    <div class="request-status progress">
+                        In Progress
+                    </div>
+
                 </div>
 
 
-                <div class="card">
-                    <span>Broken Light</span>
-                    <strong>Unit 1B</strong>
-                    <p>Tenant: Juan Dela Cruz</p>
-                    <p>Status: In Progress</p>
+                <!-- REQUEST 2 -->
+                <div class="request-item">
+
+                    <div class="request-icon">
+                        🚰
+                    </div>
+
+                    <div class="request-details">
+
+                        <h3>Leaky Faucet</h3>
+
+                        <p>
+                            Kitchen faucet was leaking.
+                        </p>
+
+                        <span>
+                            Requested: August 4, 2026
+                        </span>
+
+                    </div>
+
+                    <div class="request-status completed">
+                        Completed
+                    </div>
+
                 </div>
 
 
-                <div class="card">
-                    <span>Door Lock Repair</span>
-                    <strong>Unit 3A</strong>
-                    <p>Tenant: Pedro Reyes</p>
-                    <p>Status: Completed</p>
-                </div>
-
-            </div>
-
-
-            <!-- RECENT REQUESTS -->
-
-            <section class="activities">
-
-                <h2>Recent Requests</h2>
-
-                <div class="activity">
-                    <strong>Leaking Faucet — Unit 2B</strong>
-                    <p>Submitted September 1, 2026</p>
-                </div>
-
-                <div class="activity">
-                    <strong>Broken Light — Unit 1B</strong>
-                    <p>Submitted August 30, 2026</p>
-                </div>
-
-                <div class="activity">
-                    <strong>Door Lock Repair — Unit 3A</strong>
-                    <p>Completed August 28, 2026</p>
+                <!-- NO MORE REQUESTS -->
+                <div class="maintenance-note">
+                    <span>ℹ️</span>
+                    <p>
+                        Your maintenance requests will appear here after submission.
+                    </p>
                 </div>
 
             </section>
 
-        </section>
+        </div>
 
     </main>
 
 </div>
+
+
+<script>
+
+function submitRequest(event) {
+
+    event.preventDefault();
+
+    const issue = document.getElementById("issue").value;
+
+    alert(
+        "Maintenance request submitted successfully!\n\n" +
+        "Issue: " + issue
+    );
+
+    event.target.reset();
+}
+
+</script>
 
 </body>
 </html>

@@ -39,13 +39,6 @@ body {
     color: white;
     padding: 25px 15px;
     flex-shrink: 0;
-     background-image: 
-    linear-gradient(rgba(8, 43, 91, 0.88), rgba(8, 43, 91, 0.88)),
-    url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop.jpg");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-
 }
 
 

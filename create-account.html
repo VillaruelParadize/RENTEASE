@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RentEase - Login</title>
+    <title>RentEase - Create an Account</title>
 
     <style>
         /* --- Global Resets & Fonts --- */
@@ -16,7 +16,7 @@
         }
 
         body.login-page {
-            /* Using a placeholder image that resembles the cityscape/apartment background */
+            /* Same background image as the login page */
             background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -43,8 +43,8 @@
         .external-logo svg {
             width: 80px;
             height: 80px;
-            fill: #1a4b8c; /* Dark blue from logo */
-            stroke: #4da6ff; /* Light blue outline */
+            fill: #1a4b8c; 
+            stroke: #4da6ff; 
             stroke-width: 2px;
         }
 
@@ -59,7 +59,6 @@
             font-weight: 800;
             color: #1a4b8c;
             letter-spacing: -1px;
-            /* Text outline effect */
             -webkit-text-stroke: 1px #4da6ff; 
         }
 
@@ -69,7 +68,6 @@
             color: #ffffff;
             letter-spacing: -1px;
             margin-left: 2px;
-            /* Text outline effect */
             -webkit-text-stroke: 1px #4da6ff; 
         }
 
@@ -82,7 +80,7 @@
             -webkit-text-stroke: 0.5px #4da6ff;
         }
 
-        /* --- The Glassmorphism Login Card --- */
+        /* --- The Glassmorphism Card --- */
         .login-container {
             width: 100%;
             display: flex;
@@ -94,30 +92,37 @@
         }
 
         .login-card {
-            background: rgba(220, 230, 245, 0.6); /* Light bluish translucent */
+            background: rgba(220, 230, 245, 0.6); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-radius: 12px;
-            padding: 50px 40px;
+            padding: 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px; /* Slightly wider to accommodate longer text */
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* Hide the original logo and title inside the card since it's outside now */
-        .login-logo, .login-card h1, .login-subtitle {
-            display: none;
+        /* --- Header Text --- */
+        .form-header {
+            margin-bottom: 25px;
+        }
+
+        .form-header h2 {
+            font-size: 1.8rem;
+            color: #111;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-header p {
+            font-size: 1rem;
+            color: #333;
         }
 
         /* --- Form Elements --- */
         .input-group {
-            margin-bottom: 20px;
-        }
-
-        /* Hide labels as per the design */
-        .input-group label {
-            display: none;
+            margin-bottom: 15px;
         }
 
         .input-group input {
@@ -132,7 +137,7 @@
         }
 
         .input-group input::placeholder {
-            color: #333; /* Darker placeholder text to match image */
+            color: #333; 
             font-weight: 400;
         }
 
@@ -140,100 +145,41 @@
             box-shadow: 0 0 0 2px #1a4b8c;
         }
 
-        /* --- Options (Remember me / Forgot Password) --- */
-        .login-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            color: #111;
-        }
-
-        .login-options label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .login-options input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .login-options a {
-            color: #111;
-            text-decoration: underline;
-        }
-
-        .login-options a:hover {
-            color: #1a4b8c;
-        }
-
-        /* --- Buttons --- */
-        .login-button {
+        /* --- Register Button --- */
+        .register-button {
             width: 100%;
             padding: 16px;
-            background-color: #102a56; /* Dark navy blue */
-            color: #ffffff;
+            background-color: #209bf5; /* Bright blue matching the image */
+            color: #111; /* Dark text for contrast */
             border: none;
             border-radius: 6px;
             font-size: 1.1rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
 
-        .login-button:hover {
-            background-color: #0c1f40;
-        }
-
-        /* --- Divider --- */
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 25px 0;
-            color: #333;
-            font-size: 0.95rem;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #666;
-        }
-
-        .divider span {
-            padding: 0 15px;
-        }
-
-        /* --- Create Account Button --- */
-        .create-account-btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background-color: #209bf5; /* Bright blue */
-            color: #111;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-
-        .create-account-btn:hover {
+        .register-button:hover {
             background-color: #1a87d9;
         }
 
-        /* Hide original elements that we've replaced */
-        .login-footer, 
-        .login-card > p:last-child { /* Hides the Back to Role Selection link */
-            display: none;
+        /* --- Footer Link --- */
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #111;
+        }
+
+        .auth-footer a {
+            color: #111;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            color: #1a4b8c;
         }
 
         /* --- Responsive Design --- */
@@ -262,7 +208,6 @@
 
     <!-- Logo positioned outside the card -->
     <div class="external-logo">
-        <!-- Simple SVG representing the house logo -->
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 10 L10 45 L20 45 L20 90 L45 90 L45 60 L55 60 L55 90 L80 90 L80 45 L90 45 Z" fill="#1a4b8c" stroke="#4da6ff" stroke-width="2" stroke-linejoin="round"/>
         </svg>
@@ -276,87 +221,65 @@
 
     <div class="login-container">
         <div class="login-card">
+            
+            <div class="form-header">
+                <h2>Create an Account</h2>
+                <p>Please fill in the details below</p>
+            </div>
 
-            <!-- Hidden original logo/title -->
-            <div class="login-logo">🏠</div>
-            <h1>RentEase</h1>
-            <p class="login-subtitle" id="roleText">Login</p>
-
-            <form id="loginForm">
+            <form id="registerForm">
+                
                 <div class="input-group">
-                    <label for="email">Email</label>
+                    <input type="text" id="fullName" placeholder="Full Name" required>
+                </div>
+
+                <div class="input-group">
                     <input type="email" id="email" placeholder="Email" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="password">Password</label>
+                    <input type="tel" id="contactNumber" placeholder="Contact Number" required>
+                </div>
+
+                <div class="input-group">
                     <input type="password" id="password" placeholder="Password" required>
                 </div>
 
-                <div class="login-options">
-                    <label>
-                        <input type="checkbox">
-                        Remember me
-                    </label>
-                    <a href="#">Forgot Password?</a>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
                 </div>
 
-                <button type="submit" class="login-button">
-                    Login
+                <button type="submit" class="register-button">
+                    Register
                 </button>
 
-                <!-- Added the 'or' divider and 'Create an Account' button as seen in the image -->
-                <div class="divider">
-                    <span>or</span>
+                <div class="auth-footer">
+                    Already have an account? <a href="login.html">Login</a>
                 </div>
 
-                <a href="create-account.html" class="create-account-btn">
-                    Create an Account
-                </a>
-
             </form>
-
-            <!-- Hidden original footer/links -->
-            <p style="margin-top:20px;">
-                <a href="index.html">← Back to Role Selection</a>
-            </p>
-            <p class="login-footer">© 2026 RentEase</p>
-
         </div>
     </div>
 
     <script>
-        // GET ROLE FROM WELCOME PAGE
-        const urlParams = new URLSearchParams(window.location.search);
-        const role = urlParams.get("role");
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        // SHOW SELECTED ROLE
-        const roleText = document.getElementById("roleText");
+            // Basic validation example: Check if passwords match
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
 
-        if (role === "admin") {
-            roleText.textContent = "Admin Login";
-        } else if (role === "current-tenant") {
-            roleText.textContent = "Current Tenant Login";
-        } else {
-            roleText.textContent = "Login";
-        }
-
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            // ADMIN
-            if (role === "admin") {
-                window.location.href = "Admin/dashboard.html";
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return;
             }
-            // CURRENT TENANT
-            else if (role === "current-tenant") {
-                window.location.href = "Current-tenant/dashboard.html";
-            }
-            // NO ROLE
-            else {
-                alert("Please select a role first.");
-                window.location.href = "index.html";
-            }
+
+            // Simulate successful registration (Redirect to login page)
+            // In a real app, you would send this data to a backend server here.
+            alert("Account created successfully! Redirecting to login...");
+            
+            // Assuming the login page is named 'index.html' or 'login.html'
+            window.location.href = "index.html"; 
         });
     </script>
 

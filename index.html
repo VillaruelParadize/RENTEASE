@@ -1,207 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RentEase - Tenant Dashboard</title>
+    <title>RentEase - Welcome</title>
+    
+    <style>
+        /* --- Global Resets & Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="../css/tenant.css">
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f7fb;
+            min-height: 100vh;
+            color: #062846;
+        }
+
+        /* --- Main Container --- */
+        .welcome-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        /* --- Card Styling --- */
+        .welcome-card {
+            width: 100%;
+            max-width: 520px;
+            background: #ffffff;
+            padding: 45px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        /* --- Logo Section --- */
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: #062846;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Typography --- */
+        .welcome-card h1 {
+            color: #062846;
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #667085;
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .choose-text {
+            color: #344054;
+            font-weight: 600;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Role Selection Buttons --- */
+        .role-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .role-button {
+            text-decoration: none;
+            color: #062846;
+            border: 1px solid #e1e7ef;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            transition: all 0.2s ease;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        .role-button:hover {
+            border-color: #1976d2;
+            background: #f5f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.08);
+        }
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+            background: #eaf3ff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            color: #1976d2;
+        }
+
+        .role-button strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #062846;
+        }
+
+        .role-button small {
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.4;
+            display: block;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            margin-top: 30px;
+            color: #98a2b3;
+            font-size: 12px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 500px) {
+            .welcome-container {
+                padding: 15px;
+            }
+
+            .welcome-card {
+                padding: 35px 22px;
+                border-radius: 16px;
+            }
+
+            .welcome-card h1 {
+                font-size: 25px;
+            }
+            
+            .role-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+                margin-right: 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="tenant-layout">
+    <div class="welcome-container">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
+        <div class="welcome-card">
 
-            <div class="brand">
-                <div class="brand-icon">🏠</div>
-                <span>RentEase</span>
+            <!-- Logo (Using SVG for a crisp, professional look) -->
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
             </div>
 
-            <div class="tenant-info">
-                <div class="profile-circle"></div>
-                <h3>Hello, Guest</h3>
-                <p>Current Tenant</p>
+            <!-- Header -->
+            <h1>Welcome to RentEase</h1>
+            <p class="subtitle">RMDC Rental Apartment Management System</p>
+            <p class="choose-text">Please select your role to continue</p>
+
+            <!-- Role Selection -->
+            <div class="role-buttons">
+
+                <!-- Admin -->
+                <a href="login.html?role=admin" class="role-button">
+                    <span class="role-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Admin</strong>
+                        <small>Manage the apartment system</small>
+                    </div>
+                </a>
+
+                <!-- Current Tenant -->
+                <a href="login.html?role=current-tenant" class="role-button">
+                    <span class="role-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Current Tenant</strong>
+                        <small>Manage your rental information</small>
+                    </div>
+                </a>
+
+                <!-- Prospective Tenant -->
+                <a href="login.html?role=prospective-tenant" class="role-button">
+                    <span class="role-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                        </svg>
+                    </span>
+                    <div>
+                        <strong>Prospective Tenant</strong>
+                        <small>Find and apply for a unit</small>
+                    </div>
+                </a>
+
             </div>
 
-            <nav class="sidebar-nav">
+            <!-- Footer -->
+            <p class="footer">© 2026 RentEase</p>
 
-                <a href="tenant-dashboard.html" class="nav-item active">
-                    <span>▦</span>
-                    Dashboard
-                </a>
-
-                <a href="payments.html" class="nav-item">
-                    <span>₱</span>
-                    Payments
-                </a>
-
-                <a href="maintenance.html" class="nav-item">
-                    <span>🔧</span>
-                    Maintenance
-                </a>
-
-                <a href="profile.html" class="nav-item">
-                    <span>👤</span>
-                    Profile
-                </a>
-
-            </nav>
-
-        </aside>
-
-
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
-
-            <!-- TOP BAR -->
-            <header class="topbar">
-
-                <div>
-                    <h1>Welcome</h1>
-                    <p>Here's your rental information.</p>
-                </div>
-
-                <button class="notification-btn" title="Notifications">
-                    🔔
-                </button>
-
-            </header>
-
-
-            <!-- SUMMARY CARDS -->
-            <section class="summary-cards">
-
-                <div class="summary-card">
-                    <div class="card-label">Monthly Rent</div>
-                    <div class="card-value">₱ 3,500</div>
-                </div>
-
-                <div class="summary-card">
-                    <div class="card-label">Next Payment Due</div>
-                    <div class="card-value small">
-                        September 22, 2026
-                    </div>
-                </div>
-
-                <div class="summary-card">
-                    <div class="card-label">Payment Status</div>
-
-                    <div class="status paid">
-                        Paid
-                    </div>
-
-                    <div class="card-date">
-                        August 22, 2026
-                    </div>
-                </div>
-
-            </section>
-
-
-            <!-- QUICK ACTIONS -->
-            <section class="section">
-
-                <h2>Quick Actions</h2>
-
-                <div class="quick-actions">
-
-                    <!-- PAYMENT STATUS -->
-                    <div class="action-card">
-
-                        <h3>Payment Status</h3>
-
-                        <div class="action-center">
-                            <div class="check-icon">✓</div>
-
-                            <strong>All caught up!</strong>
-
-                            <p>
-                                You have no outstanding payments
-                            </p>
-                        </div>
-
-                        <a href="payment-history.html"
-                           class="action-button">
-                            View Payment History
-                        </a>
-
-                    </div>
-
-
-                    <!-- MAINTENANCE -->
-                    <div class="action-card">
-
-                        <h3>Request Maintenance</h3>
-
-                        <div class="maintenance-item">
-                            <div>
-                                <strong>Leaky Faucet</strong>
-                                <span>August 4, 2026</span>
-                            </div>
-
-                            <span class="maintenance-status completed">
-                                Completed
-                            </span>
-                        </div>
-
-                        <div class="maintenance-item">
-                            <div>
-                                <strong>Electricity Breakdown</strong>
-                                <span>August 21, 2026</span>
-                            </div>
-
-                            <span class="maintenance-status progress">
-                                In Progress
-                            </span>
-                        </div>
-
-                        <a href="tenant-maintenance.html"
-                           class="view-link">
-                            View all requests
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- LEASE DOCUMENT -->
-            <section class="document-section">
-
-                <div>
-                    <h2>Lease Documents</h2>
-
-                    <div class="document-info">
-                        <div class="document-icon">
-                            📄
-                        </div>
-
-                        <div>
-                            <strong>Lease Contract Agreement</strong>
-
-                            <p>
-                                Signed on February 22, 2026
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="download-button">
-                    Download
-                </button>
-
-            </section>
-
-        </main>
+        </div>
 
     </div>
 
 </body>
-
 </html>
